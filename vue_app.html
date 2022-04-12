@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.2/css/boxicons.min.css" integrity="sha512-AGmpdsTqvAh2GvTWzVhhJ9VqQb1eAXwOM7uiWtv0DzcnGaGWy98K51z2cK5OG3gp4NB1HbMaD7p0MeO9kE7E3w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/todo.css">
+</head>
+<body>
+<main id="app">
+    <nav class="navbar p-2 has-background-info" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="#">
+            <span class="title has-text-white">
+                Todo List 
+            </span>
+          </a>
+      
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+
+      
+ 
+          </div>
+      
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <a class="button is-primary"
+                @click="showAddForm">
+                  <strong>Add Todo</strong>
+                </a>
+                <a class="button is-light"
+                @click="showTodoList">
+                  Todo List
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <section class="section">
+          <div class="container" v-if="showHome">
+              <div class="columns">
+                  <div class="column is-6">
+                      <br><br>
+                      <br><br>
+            
+                      <br><br>
+                      <h2 class="title">Todo List for you</h2>
+                      <p class="subtitle mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo maiores iste dolores mollitia? Dolor, quam.</p>
+                      <a href="#" @click="showAddForm" class="button has-background-primary has-text-white">
+                          Add Todo
+                      </a>
+                  </div>
+                  <div class="column is-6">
+                      <img src="./PNG/payment.png" class="" alt="">
+                  </div>
+              </div>
+          </div>
+          <!-- TODOS -->
+          <div class="container mt-3" v-if="showTodos">
+              <center>
+                  <div class="title mb-3">
+                      My Todo List 
+                  </div>
+                  <div class="subtitle mt-3 mb-3">
+                      Todos Count {{getTodosCount}}
+                  </div>
+              </center>
+            <div class="columns">
+                <div class="column">
+                    <div v-for="todo in todos" class="notification"
+                    >
+                        <button class="delete"></button>
+                        <div class="title">
+                            #{{todo.id}} {{todo.title}}
+                            <span class="tag is-link"
+                            v-if="todo.status">Doned</span>
+                            <span class="tag is-danger"
+                            v-else>In progress</span>
+                        </div>
+                        <div class="subtitle">
+                            {{todo.description}}
+                        </div>
+                        <div class="mt-1">
+                            <a href="#" class="button has-background-success
+                            has-text-white">
+                                <i class='bx bx-check-double'></i>
+                                Doned
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <!-- ADD TODO  -->
+          <div class="container mt-3" v-if="showForm">
+
+            <center>
+                <div class="title mb-3">
+                    Add Todo
+                </div>
+            </center>
+            <div class="columns">
+                <div class="column is-6">
+                    <img src="./PNG/payment.png" alt="">
+                </div>
+                <div class="column is-6">
+                    <div class="field">
+                        <label class="label">Todo title</label>
+                        <div class="control">
+                          <input v-model="title" class="input" type="text" placeholder="Title">
+                        </div>
+                    </div>       
+                    <div class="field">
+                        <label class="label">Todo Time</label>
+                        <div class="control">
+                          <input v-model="added" class="input is-danger" type="time" placeholder="Email input" >    
+                        </div>
+        
+                    </div>                      
+                    <div class="field">
+                        <label class="label">Select priority</label>
+                        <div class="control">
+                          <div class="select">
+                            <select v-model="priority">
+                              <option value="is-danger">Is Danger</option>
+                              <option value="is-info">Is Info</option>
+                              <option value="is-primary">Is Primary</option>
+                            </select>
+                          </div>
+                        </div>
+                    </div>                      
+                    <div class="field">
+                        <label class="label">Description</label>
+                        <div class="control">
+                          <textarea v-model="description" class="textarea" placeholder="Write something.."></textarea>
+                        </div>
+                    </div>                             
+                    <div class="field is-grouped">
+                        <div class="control">
+                          <button class="button is-link"
+                          @click="addTodo">Submit</button>
+                        </div>
+                        <div class="control">
+                          <button class="button is-link is-light"
+                          @click="showTodoList">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+          </div>
+      </section>
+      <br><br>
+      <br><br>
+      <br><br>
+
+      <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            <strong>Todo</strong> by <a href="#">
+                Me
+            </a>. The source code is licensed
+            <a href="#">MIT</a>. The website content
+            is licensed <a href="#">CC BY NC SA 4.0</a>.
+          </p>
+        </div>
+      </footer>
+</main>
+    <script src="./js/vue.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+</html>

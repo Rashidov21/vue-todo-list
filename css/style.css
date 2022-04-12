@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Moonrocks&display=swap');
+
+/* @font-face {
+    font-family: 'Lato', sans-serif;
+    src: url(../fonts/Lato-Regular.ttf);
+}
+@font-face {
+    font-family: 'Rubik Moonrocks', cursive;
+    src: url(../fonts/RubikMoonrocks-Regular.ttf);
+} */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+h4{
+    font-family: 'Rubik Moonrocks', cursive;
+}
+.text{
+    /* font-family: 'Gill Sans', sans-serif; */
+    /* font-size: 1em; 1em == 16px */
+    /* font-weight: 700;
+    font-style: italic; */
+    /* font:1em  'Gill Sans', sans-serif;
+    font-variant: small-caps; */
+}
+/* https://fontawesome.com/ */
+center > h4 > i{
+    font-size: 2em;
+    color: orange;
+}
+section{
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+.container{
+    padding-left: 6%;
+    padding-right: 6%;
+}
+.message{
+    max-width: 500px;
+    min-height:150px;
+    margin-top: 30px;
+    margin-left: 30px;
+    padding:10px 20px;
+    background-color: orange;
+    box-shadow: 2px 2px 3.5px black;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    display: inline-block;
+}
+.message .close{
+    float: right;
+}
+.close a i{
+    color: #232328;
+}

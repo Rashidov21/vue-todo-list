@@ -1,5 +1,10 @@
 import {set, ref, get } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js";
 import { database } from './db.js'
+import { data } from './todos.json'
+
+
+console.log(data)
+
 
 function writeTodoData(todoId, title, description, priority, time) {
 

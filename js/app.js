@@ -1,18 +1,5 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
-import { getDatabase, set, ref, get } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js";
-
-const firebaseConfig = {
-    apiKey: "AIzaSyCTUFhSUwzoXvDIu8pOwSYSgCGqHahuVVE",
-    authDomain: "todolist-cb813.firebaseapp.com",
-    projectId: "todolist-cb813",
-    storageBucket: "todolist-cb813.appspot.com",
-    messagingSenderId: "823875569410",
-    appId: "1:823875569410:web:bfad3f7c683f0f37d0e41b"
-};
-
-
-const firebase_app = initializeApp(firebaseConfig);
-const database = getDatabase(firebase_app)
+import {set, ref, get } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js";
+import { database } from './db.js'
 
 function writeTodoData(todoId, title, description, priority, time) {
 

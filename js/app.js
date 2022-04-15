@@ -22,7 +22,7 @@ function getTodoData() {
         }
     )
 }
-getTodoData()
+// getTodoData()
 const app = new Vue({
     el: "#app",
     data() {

@@ -1,3 +1,41 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+import { getDatabase, set, ref, get, child } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyCTUFhSUwzoXvDIu8pOwSYSgCGqHahuVVE",
+    authDomain: "todolist-cb813.firebaseapp.com",
+    projectId: "todolist-cb813",
+    storageBucket: "todolist-cb813.appspot.com",
+    messagingSenderId: "823875569410",
+    appId: "1:823875569410:web:bfad3f7c683f0f37d0e41b"
+};
+
+
+const firebase_app = initializeApp(firebaseConfig);
+const database = getDatabase(firebase_app)
+
+function writeTodoData(todoId, title, description, priority, time) {
+
+    set(ref(database, 'todos/' + todoId), {
+        title: title,
+        description: description,
+        priority: priority,
+        status: false,
+        time: time
+    });
+}
+// writeTodoData(1, "Play Game", "Lorem ipsum dolor sit amet consectetur adipisicing elit.", "is-info", "15:00")
+
+function getTodoData() {
+    get(
+        ref(database, `todos/`)
+    ).then(
+        data => {
+            console.log(data.val())
+        }
+    )
+}
+getTodoData()
 const app = new Vue({
     el: "#app",
     data() {
@@ -11,31 +49,7 @@ const app = new Vue({
             status: false,
             priority: "",
             added: "00:00",
-            todos: [{
-                    id: 1,
-                    title: "Play Game",
-                    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo maiores iste dolores mollitia? Dolor, quam.",
-                    priority: "is-info",
-                    date: "13:00",
-                    status: false
-                },
-                {
-                    id: 2,
-                    title: "Play PS5",
-                    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo maiores iste dolores mollitia? Dolor, quam.",
-                    priority: "is-primary",
-                    date: "11:00",
-                    status: false
-                },
-                {
-                    id: 3,
-                    title: "Play Hard",
-                    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo maiores iste dolores mollitia? Dolor, quam.",
-                    priority: "is-danger",
-                    date: "15:00",
-                    status: false
-                }
-            ],
+            todos: [],
             doned: []
         }
     },
@@ -55,7 +69,14 @@ const app = new Vue({
         },
         // ADD TODO 
         addTodo() {
+            writeTodoData(
+                this.getTodosCount + 1,
+                this.title,
+                this.description,
+                this.priority,
+                this.getTimeNow
 
+            )
             this.todos.push({
                 id: this.getTodosCount + 1,
                 title: this.title,
@@ -91,8 +112,6 @@ const app = new Vue({
         getTimeNow() {
             return new Date().toLocaleTimeString();
         },
-        // getPriority(todo) {
-        //     return todo.priority
-        // }
+
     }
 });
